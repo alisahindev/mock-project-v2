@@ -1,0 +1,362 @@
+---
+alwaysApply: true
+---
+
+# Glass Morphism Design System - Tasarım Kuralları
+
+Bu belge, projemizde kullanılan glass morphism tasarım sisteminin kurallarını ve en iyi uygulamalarını içerir.
+
+## 📋 İçindekiler
+
+1. [Renk Sistemi](#renk-sistemi)
+2. [Tipografi](#tipografi)
+3. [Glass Effect Kullanım Kuralları](#glass-effect-kullanım-kuralları)
+4. [Komponent Stillendirme](#komponent-stillendirme)
+5. [Entegrasyon Adımları](#entegrasyon-adımları)
+6. [Yapılması ve Yapılmaması Gerekenler](#yapılması-ve-yapılmaması-gerekenler)
+
+---
+
+## 🎨 Renk Sistemi
+
+### Temel Prensipler
+
+- **OKLCH renk uzayı kullanın**: Daha iyi renk doğruluğu ve tutarlılık için
+- **CSS Custom Properties**: Tüm renkler `--color-*` değişkenleri ile tanımlanır
+- **Semantic tokens**: `--background`, `--foreground`, `--primary`, vb. kullanın
+
+### Renk Tanımlamaları
+
+\`\`\`css
+/_ globals.css içinde _/
+@theme {
+--color-background: oklch(0.98 0.002 264);
+--color-foreground: oklch(0.15 0.01 264);
+--color-primary: oklch(0.55 0.25 264);
+/_ ... diğer renkler _/
+}
+\`\`\`
+
+### Dark Mode
+
+- Dark mode için ayrı renk değerleri tanımlayın
+- Kontrast oranlarına dikkat edin (WCAG AA standardı: minimum 4.5:1)
+- Glass effect'ler dark mode'da daha belirgin olmalıdır
+
+\`\`\`css
+@media (prefers-color-scheme: dark) {
+:root {
+--color-background: oklch(0.15 0.01 264);
+--color-foreground: oklch(0.95 0.005 264);
+}
+}
+\`\`\`
+
+---
+
+## ✍️ Tipografi
+
+### Line Height
+
+- Body text için: `leading-relaxed` (1.625) veya `leading-6` (1.5)
+- Headings için: `leading-tight` (1.25) veya `leading-snug` (1.375)
+
+### Responsive Typography
+
+\`\`\`tsx
+
+<h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+  Responsive Başlık
+</h1>
+\`\`\`
+
+---
+
+## 🔮 Glass Effect Kullanım Kuralları
+
+### Glass Effect Nedir?
+
+Glass morphism, arka plan bulanıklığı (backdrop blur), yarı şeffaflık ve ince kenarlıklar kullanarak cam benzeri bir görünüm oluşturur.
+
+### Temel Glass Utility Class'ları
+
+\`\`\`css
+/_ globals.css içinde tanımlı _/
+.glass {
+background: color-mix(in oklch, var(--background) 70%, transparent);
+backdrop-filter: blur(12px);
+border: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
+}
+
+.glass-strong {
+background: color-mix(in oklch, var(--background) 85%, transparent);
+backdrop-filter: blur(16px);
+border: 1px solid color-mix(in oklch, var(--foreground) 15%, transparent);
+}
+
+.glass-subtle {
+background: color-mix(in oklch, var(--background) 50%, transparent);
+backdrop-filter: blur(8px);
+border: 1px solid color-mix(in oklch, var(--foreground) 5%, transparent);
+}
+\`\`\`
+
+### Glass Effect Kullanım Şartları
+
+#### ✅ Glass Effect Kullanılmalı:
+
+1. **Overlay komponentler**: Modal, Dialog, Dropdown, Popover
+2. **Floating elementler**: Tooltip, Toast, Notification
+3. **Navigation**: Header, Sidebar (sabit pozisyonda)
+4. **Card komponentler**: İçerik kartları, dashboard widget'ları
+5. **Form elementler**: Input, Select, Textarea (glass varyantı ile)
+
+#### ❌ Glass Effect Kullanılmamalı:
+
+1. **Arka plan olmayan elementler**: Boş alan üzerinde glass effect anlamsızdır
+2. **Çok fazla iç içe glass**: Maksimum 2-3 seviye glass iç içe kullanın
+3. **Küçük elementler**: Icon button'lar, badge'ler (çok küçük olmamalı)
+4. **Yüksek kontrast gereken yerler**: Kritik bilgi içeren alanlar
+
+### Glass Effect Seviyeleri
+
+| Seviye         | Kullanım Alanı                     | Opacity | Blur |
+| -------------- | ---------------------------------- | ------- | ---- |
+| `glass-subtle` | Arka plan kartları, subtle overlay | 50%     | 8px  |
+| `glass`        | Standart kartlar, form elementleri | 70%     | 12px |
+| `glass-strong` | Modal, dialog, önemli overlay'ler  | 85%     | 16px |
+
+---
+
+## 🎯 Komponent Stillendirme
+
+### Shadcn Komponentlerine Glass Varyantı Ekleme
+
+#### 1. Variant Tanımlama
+
+\`\`\`tsx
+// components/ui/button.tsx
+const buttonVariants = cva(
+"base-classes...",
+{
+variants: {
+variant: {
+// Mevcut varyantlar...
+glass: "glass hover:glass-strong transition-all duration-200",
+"glass-primary": "glass border-primary/20 text-primary hover:bg-primary/10",
+}
+}
+}
+)
+\`\`\`
+
+#### 2. Background Renklerini Kaldırma
+
+Glass effect'in çalışması için solid background'ları kaldırın:
+
+\`\`\`tsx
+// ❌ Yanlış
+<Card className="bg-card">
+
+// ✅ Doğru
+<Card className="glass">
+\`\`\`
+
+#### 3. Border ve Shadow Ayarları
+
+\`\`\`tsx
+// Glass komponentler için ince, yarı şeffaf border
+className="border border-white/10 dark:border-white/5"
+
+// Shadow kullanımı (opsiyonel)
+className="shadow-lg shadow-black/5"
+\`\`\`
+
+### Layout Method Priority
+
+1. **Flexbox** (çoğu layout için): `flex items-center justify-between`
+2. **CSS Grid** (kompleks 2D layout'lar için): `grid grid-cols-3 gap-4`
+3. **Absolute positioning** (sadece gerektiğinde)
+
+### Spacing
+
+- **Tailwind spacing scale kullanın**: `p-4`, `mx-2`, `gap-6`
+- **Arbitrary values kullanmayın**: `p-[16px]` yerine `p-4`
+- **Gap classes tercih edin**: Margin yerine `gap-4`, `gap-x-2`
+
+---
+
+## 🔧 Entegrasyon Adımları
+
+### Yeni Bir Komponent için Glass Effect Ekleme
+
+#### Adım 1: Komponenti Oku
+
+\`\`\`bash
+
+# Mevcut komponenti incele
+
+ReadFile components/ui/your-component.tsx
+\`\`\`
+
+#### Adım 2: Variant Ekle
+
+\`\`\`tsx
+import { cva, type VariantProps } from "class-variance-authority"
+
+const componentVariants = cva(
+"base-classes",
+{
+variants: {
+variant: {
+default: "bg-background",
+glass: "glass hover:glass-strong transition-all",
+}
+},
+defaultVariants: {
+variant: "default"
+}
+}
+)
+
+export interface ComponentProps
+extends React.HTMLAttributes<HTMLDivElement>,
+VariantProps<typeof componentVariants> {}
+
+export function Component({ variant, className, ...props }: ComponentProps) {
+return (
+
+<div className={cn(componentVariants({ variant }), className)} {...props} />
+)
+}
+\`\`\`
+
+#### Adım 3: Solid Background'ları Kaldır
+
+\`\`\`tsx
+// ❌ Önce
+className="bg-card text-card-foreground"
+
+// ✅ Sonra (glass varyantı için)
+className="text-card-foreground" // bg-card kaldırıldı
+\`\`\`
+
+#### Adım 4: Test Et
+
+\`\`\`tsx
+// Kullanım örneği
+<YourComponent variant="glass">
+İçerik
+</YourComponent>
+\`\`\`
+
+### Mevcut Sayfaya Glass Komponentleri Entegre Etme
+
+#### Adım 1: Import'ları Güncelle
+
+\`\`\`tsx
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+// ... diğer komponentler
+\`\`\`
+
+#### Adım 2: Varyantları Uygula
+
+\`\`\`tsx
+// Önce
+<Card>
+<Button>Click</Button>
+</Card>
+
+// Sonra
+<Card variant="glass">
+<Button variant="glass-primary">Click</Button>
+</Card>
+\`\`\`
+
+#### Adım 3: Responsive Düzenlemeler
+
+\`\`\`tsx
+
+<div className="flex flex-col md:flex-row gap-4 flex-wrap">
+  <Button variant="glass" size="sm" className="whitespace-nowrap">
+    Button 1
+  </Button>
+  <Button variant="glass" size="sm" className="whitespace-nowrap">
+    Button 2
+  </Button>
+</div>
+\`\`\`
+
+---
+
+## ✅ Yapılması ve Yapılmaması Gerekenler
+
+### ✅ Yapılması Gerekenler
+
+1. **Glass utility class'larını kullanın**: `.glass`, `.glass-strong`, `.glass-subtle`
+2. **Semantic design tokens kullanın**: `bg-background`, `text-foreground`
+3. **Responsive tasarım yapın**: `md:`, `lg:` prefix'lerini kullanın
+4. **Kontrast kontrolü yapın**: Text okunabilir olmalı
+5. **Transition ekleyin**: `transition-all duration-200` ile smooth geçişler
+6. **Dark mode test edin**: Her iki temada da test edin
+7. **Tailwind spacing scale kullanın**: `p-4`, `gap-6`, vb.
+8. **Flex-wrap kullanın**: Taşmaları önlemek için `flex-wrap`
+
+### ❌ Yapılmaması Gerekenler
+
+1. **Solid background + glass karıştırmayın**: `bg-card` ile `.glass` birlikte kullanmayın
+2. **Çok fazla glass iç içe kullanmayın**: Maksimum 2-3 seviye
+3. **Arbitrary values kullanmayın**: `p-[16px]` yerine `p-4`
+4. **Emojileri icon olarak kullanmayın**: Lucide icons kullanın
+5. **Gradient abuse yapmayın**: Sadece gerektiğinde, subtle gradients
+6. **Purple/violet kullanmayın**: Açıkça istenmediği sürece
+7. **Decorative blob'lar oluşturmayın**: Abstract shapes yerine gerçek içerik
+8. **Float kullanmayın**: Flexbox veya Grid kullanın
+
+### 🎨 Glass Effect Best Practices
+
+\`\`\`tsx
+// ✅ İyi Örnek
+<Card variant="glass" className="transition-all hover:glass-strong">
+<CardHeader className="border-b border-white/10">
+<CardTitle className="text-foreground">Başlık</CardTitle>
+</CardHeader>
+<CardContent className="pt-6">
+İçerik
+</CardContent>
+</Card>
+
+// ❌ Kötü Örnek
+<Card className="bg-card glass"> {/_ bg-card glass'ı bloklar _/}
+<CardHeader className="bg-primary"> {/_ Solid background glass'ı bozar _/}
+<CardTitle>Başlık</CardTitle>
+</CardHeader>
+</Card>
+\`\`\`
+
+### 🔍 Debug İpuçları
+
+Glass effect çalışmıyorsa kontrol edin:
+
+1. **Parent element'te background var mı?** Glass effect arka plan bulanıklığı gerektirir
+2. **Solid background kullanılıyor mu?** `bg-card`, `bg-background` gibi class'ları kaldırın
+3. **Z-index doğru mu?** Glass element üstte olmalı
+4. **Backdrop-filter destekleniyor mu?** Tarayıcı uyumluluğunu kontrol edin
+
+---
+
+## 📚 Kaynaklar
+
+- [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [OKLCH Color Space](https://oklch.com/)
+- [Glass Morphism Design Trend](https://uxdesign.cc/glassmorphism-in-user-interfaces-1f39bb1308c9)
+
+---
+
+## 🔄 Güncelleme Notları
+
+Bu belge, proje geliştikçe güncellenmelidir. Yeni glass varyantları, komponentler veya best practice'ler eklendiğinde bu dokümanı güncelleyin.
+
+**Son Güncelleme**: Tailwind v4 + Shadcn Glass Integration

@@ -25,7 +25,7 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 will-change-transform',
         isScrolled
-          ? 'backdrop-filter blur-32 saturate-180 bg-gradient-to-br from-white/25 via-white/15 to-white/10 border-b border-white/30 shadow-lg'
+          ? 'glass-header bg-gradient-to-br from-white/25 via-white/15 to-white/10 border-b border-white/30 shadow-lg'
           : 'bg-transparent',
       )}
     >
@@ -87,7 +87,7 @@ export function Header() {
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               style={{ willChange: 'transform' }}
             >
-              <Card variant="default" className={cn('transition-all duration-300', isScrolled ? 'px-2 py-1' : 'p-2')}>
+              <Card className={cn('transition-all duration-300', isScrolled ? 'px-2 py-1' : 'p-2')}>
                 <Flame className="text-orange-400 h-4 w-4" />
               </Card>
             </motion.div>
@@ -99,7 +99,7 @@ export function Header() {
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               style={{ willChange: 'transform' }}
             >
-              <Card variant="default" className={cn('transition-all duration-300', isScrolled ? 'px-2 py-1' : 'p-2')}>
+              <Card className={cn('transition-all duration-300', isScrolled ? 'px-2 py-1' : 'p-2')}>
                 <Trophy className="text-yellow-400 h-4 w-4" />
               </Card>
             </motion.div>

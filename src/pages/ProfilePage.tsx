@@ -76,7 +76,7 @@ export function ProfilePage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'].map((day, index) => (
+                {['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'].map(day => (
                   <div key={day} className="flex items-center justify-between">
                     <span className="text-white/80 text-sm">{day}</span>
                     <div className="flex items-center space-x-2">
