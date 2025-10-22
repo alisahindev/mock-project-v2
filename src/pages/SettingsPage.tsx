@@ -1,7 +1,8 @@
-import { Bell, Globe, HelpCircle, Info, Moon, Settings, Shield, Sun, Volume2, VolumeX } from 'lucide-react'
+import { Switch } from '@/components/ui/switch'
+import { Bell, Globe, HelpCircle, Info, Settings, Shield, Sun, Volume2, VolumeX } from 'lucide-react'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
-import { Input } from '../components/ui/input'
+import { GlassInput } from '../components/ui/input'
 import { useTheme } from '../lib/theme-context'
 
 export function SettingsPage() {
@@ -9,14 +10,8 @@ export function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">Ayarlar ⚙️</h2>
-        <p className="text-white/80">Uygulamanızı kişiselleştirin</p>
-      </div>
-
       {/* Profile Settings */}
-      <Card variant="default">
+      <Card>
         <CardHeader>
           <CardTitle className="text-white flex items-center">
             <Settings className="h-5 w-5 mr-2" />
@@ -26,20 +21,20 @@ export function SettingsPage() {
         <CardContent className="space-y-4">
           <div>
             <label className="block text-white/80 text-sm mb-2">Ad Soyad</label>
-            <Input variant="default" placeholder="Adınızı girin" />
+            <GlassInput placeholder="Adınızı girin" />
           </div>
           <div>
             <label className="block text-white/80 text-sm mb-2">E-posta</label>
-            <Input variant="filled" type="email" placeholder="E-posta adresinizi girin" />
+            <GlassInput type="email" placeholder="E-posta adresinizi girin" />
           </div>
-          <Button variant="primary" size="default-text" className="w-full">
+          <Button variant="glass-secondary" size="default" className="w-full">
             Profili Güncelle
           </Button>
         </CardContent>
       </Card>
 
       {/* Learning Preferences */}
-      <Card variant="elevated">
+      <Card>
         <CardHeader>
           <CardTitle className="text-white">Öğrenme Tercihleri</CardTitle>
           <CardDescription className="text-white/70">Öğrenme deneyiminizi kişiselleştirin</CardDescription>
@@ -87,7 +82,7 @@ export function SettingsPage() {
       </Card>
 
       {/* Appearance */}
-      <Card variant="subtle">
+      <Card>
         <CardHeader>
           <CardTitle className="text-white">Görünüm</CardTitle>
           <CardDescription className="text-white/70">Tema ve görsel ayarlar</CardDescription>
@@ -104,33 +99,11 @@ export function SettingsPage() {
               </div>
             </div>
             <div className="flex space-x-2">
-              <Button
-                variant={theme === 'light' ? 'primary' : 'secondary'}
-                size="default"
-                onClick={() => setTheme('light')}
-                className={theme === 'light' ? 'bg-blue-500/20 border-blue-400/40' : ''}
-                title="Açık tema"
-              >
-                <Sun className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={theme === 'dark' ? 'primary' : 'ghost'}
-                size="default"
-                className={theme === 'dark' ? 'bg-blue-500/20 border-blue-400/40 text-white' : 'text-white/60'}
-                onClick={() => setTheme('dark')}
-                title="Koyu tema"
-              >
-                <Moon className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={theme === 'system' ? 'primary' : 'ghost'}
-                size="default"
-                className={theme === 'system' ? 'bg-blue-500/20 border-blue-400/40 text-white' : 'text-white/60'}
-                onClick={() => setTheme('system')}
-                title="Sistem teması"
-              >
-                <Settings className="h-4 w-4" />
-              </Button>
+              <Switch
+                variant="glass"
+                checked={resolvedTheme === 'light'}
+                onCheckedChange={() => setTheme(prev => (prev === 'light' ? 'dark' : 'light'))}
+              />
             </div>
           </div>
 
@@ -150,7 +123,7 @@ export function SettingsPage() {
       </Card>
 
       {/* Privacy & Security */}
-      <Card variant="default">
+      <Card>
         <CardHeader>
           <CardTitle className="text-white flex items-center">
             <Shield className="h-5 w-5 mr-2" />
@@ -158,11 +131,19 @@ export function SettingsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <Button variant="ghost" size="default-text" className="w-full justify-start text-white hover:bg-white/20">
+          <Button
+            variant="glass-secondary"
+            size="default"
+            className="w-full justify-start text-white hover:bg-white/20"
+          >
             <Shield className="h-4 w-4 mr-3" />
             Gizlilik Politikası
           </Button>
-          <Button variant="ghost" size="default-text" className="w-full justify-start text-white hover:bg-white/20">
+          <Button
+            variant="glass-secondary"
+            size="default"
+            className="w-full justify-start text-white hover:bg-white/20"
+          >
             <Settings className="h-4 w-4 mr-3" />
             Veri Yönetimi
           </Button>
@@ -170,16 +151,24 @@ export function SettingsPage() {
       </Card>
 
       {/* Support */}
-      <Card variant="elevated">
+      <Card>
         <CardHeader>
           <CardTitle className="text-white">Destek</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <Button variant="ghost" size="default-text" className="w-full justify-start text-white hover:bg-white/20">
+          <Button
+            variant="glass-secondary"
+            size="default"
+            className="w-full justify-start text-white hover:bg-white/20"
+          >
             <HelpCircle className="h-4 w-4 mr-3" />
             Yardım Merkezi
           </Button>
-          <Button variant="ghost" size="default-text" className="w-full justify-start text-white hover:bg-white/20">
+          <Button
+            variant="glass-secondary"
+            size="default"
+            className="w-full justify-start text-white hover:bg-white/20"
+          >
             <Info className="h-4 w-4 mr-3" />
             Hakkında
           </Button>

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { BottomNavigation } from './BottomNavigation'
-import { TopBar } from './TopBar'
+import { Header } from './Header'
 
 interface MobileLayoutProps {
   children: ReactNode
@@ -8,15 +8,13 @@ interface MobileLayoutProps {
 
 export function MobileLayout({ children }: MobileLayoutProps) {
   return (
-    <div className="min-h-screen">
-      {/* Top Bar */}
-      <TopBar />
-      
+    <div className="min-h-dvh">
+      {/* Header */}
+      <Header />
+
       {/* Main Content */}
-      <main className="pb-28 pt-16 px-4">
-        {children}
-      </main>
-      
+      <main className="pb-28 pt-20 px-4 min-h-dvh">{children}</main>
+
       {/* Bottom Navigation */}
       <BottomNavigation />
     </div>

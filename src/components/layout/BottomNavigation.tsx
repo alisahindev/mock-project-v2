@@ -52,12 +52,12 @@ export function BottomNavigation() {
     >
       <motion.nav
         className={cn(
-          'rounded-3xl relative overflow-hidden backdrop-filter blur-12 saturate-250 bg-linear-to-br from-white/80 to-white/60 border border-white/70 shadow-2xl',
+          'rounded-3xl relative overflow-hidden backdrop-filter blur-12 saturate-250 bg-gradient-to-br from-white/80 to-white/60 border border-white/70 shadow-2xl',
         )}
       >
         {/* Aktif durum göstergesi */}
         <motion.div
-          className="absolute backdrop-filter blur-8 saturate-250 bg-linear-to-br from-white/80 to-white/65 border border-white/80 shadow-2xl rounded-2xl"
+          className="absolute backdrop-filter blur-8 saturate-250 bg-gradient-to-br from-white/80 to-white/65 border border-white/80 shadow-2xl rounded-2xl"
           animate={{
             width: indicatorStyle.width,
             left: indicatorStyle.left,
