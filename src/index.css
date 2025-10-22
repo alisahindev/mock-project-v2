@@ -1,8 +1,56 @@
 @import 'tailwindcss';
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Radix UI Animation Support */
+  [data-state='open'] {
+    animation: slideInFromLeft 0.3s ease-out;
+  }
+
+  [data-state='closed'] {
+    animation: slideOutToLeft 0.3s ease-in;
+  }
+
+  /* Sheet Content Animation */
+  [data-radix-dialog-content] {
+    animation: slideInFromLeft 0.3s ease-out;
+  }
+
+  [data-radix-dialog-content][data-state='closed'] {
+    animation: slideOutToLeft 0.3s ease-in;
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOutToLeft {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+}
+
 @theme {
   /* Tailwind v4 theme configuration with CSS variables */
-  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Poppins', system-ui, sans-serif;
 
   /* Color palette using CSS custom properties */
   --color-background: oklch(100% 0 0);

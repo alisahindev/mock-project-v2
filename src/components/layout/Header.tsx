@@ -3,9 +3,11 @@ import { Flame, Trophy, User } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { cn } from '../../lib/utils'
 import { Card } from '../ui/card'
+import { ProfileDrawer } from './ProfileDrawer'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,22 +27,25 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 will-change-transform',
         isScrolled
-          ? 'glass-header bg-gradient-to-br from-white/25 via-white/15 to-white/10 border-b border-white/30 shadow-lg'
+          ? 'glass-header bg-linear-to-br from-white/25 via-white/15 to-white/10 border-b border-white/30 shadow-lg'
           : 'bg-transparent',
       )}
     >
       <div className="px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <motion.div
+            <motion.button
+              onClick={() => setIsProfileDrawerOpen(true)}
               animate={{
                 width: isScrolled ? 32 : 48,
                 height: isScrolled ? 32 : 48,
               }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               style={{ willChange: 'transform' }}
+              className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent rounded-full"
+              aria-label="Open profile drawer"
             >
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center shadow-lg">
+              <div className="w-full h-full rounded-full bg-linear-to-br from-blue-400 to-purple-500 flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-200">
                 <motion.div
                   animate={{
                     scale: isScrolled ? 0.8 : 1,
@@ -51,7 +56,7 @@ export function Header() {
                   <User className="text-white h-6 w-6" />
                 </motion.div>
               </div>
-            </motion.div>
+            </motion.button>
 
             <motion.div
               animate={{
@@ -106,6 +111,9 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {/* Profile Drawer */}
+      <ProfileDrawer open={isProfileDrawerOpen} onOpenChange={setIsProfileDrawerOpen} />
     </motion.header>
   )
 }
