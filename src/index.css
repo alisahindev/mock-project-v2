@@ -245,8 +245,6 @@
   }
 
   .glass-button-primary {
-    height: 2.25rem;
-    padding: 0 1rem;
     border-radius: var(--radius-full);
     backdrop-filter: blur(16px) saturate(180%);
     background: linear-gradient(135deg, oklch(0% 0 0 / 0.8) 0%, oklch(0% 0 0 / 0.6) 100%);

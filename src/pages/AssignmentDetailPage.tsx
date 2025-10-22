@@ -357,12 +357,12 @@ export function AssignmentDetailPage() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button variant="glass-primary" size="lg" className="flex-1 text-white">
+          <Button variant="glass-primary" className="flex-1 text-white">
             <Play className="h-5 w-5 mr-2" />
             {assignment.status === 'not_started' ? 'Başla' : 'Devam Et'}
           </Button>
           {assignment.status === 'in_progress' && (
-            <Button variant="glass" size="lg" className="text-white border-white/20 hover:border-white/40">
+            <Button variant="glass" className="text-white border-white/20 hover:border-white/40">
               <Target className="h-5 w-5 mr-2" />
               Kaydet
             </Button>
