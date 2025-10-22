@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { MobileLayout } from './components/layout/MobileLayout'
 import { ThemeProvider } from './lib/theme-context'
+import { AssignmentDetailPage } from './pages/AssignmentDetailPage'
 import { HomePage } from './pages/HomePage'
 import { LessonsPage } from './pages/LessonsPage'
 import { PracticePage } from './pages/PracticePage'
@@ -14,6 +15,7 @@ export default function App() {
         <MobileLayout>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/assignment/:id" element={<AssignmentDetailPage />} />
             <Route path="/lessons" element={<LessonsPage />} />
             <Route path="/practice" element={<PracticePage />} />
             <Route path="/profile" element={<ProfilePage />} />

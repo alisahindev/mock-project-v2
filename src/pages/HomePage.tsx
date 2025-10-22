@@ -1,70 +1,21 @@
 import { BookOpen, Play, Target, TrendingUp, Trophy } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AssignmentList } from '../components/ui/assignment-card'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
+import { getAllAssignments } from '../lib/mock-data'
 
 export function HomePage() {
-  // Örnek assignment verileri
-  const assignments = [
-    {
-      title: 'Restoranda Sipariş Verme',
-      learningObjective: 'Kibar istekler öğren',
-      category: 'Günlük Yaşam',
-      deadline: 'Cuma',
-      backgroundImage:
-        'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      progress: 65,
-      isOngoing: true,
-      socialProof: 'Çoğu sınıf arkadaşı bitti!',
-      onCardClick: () => console.log('Devam eden atama tıklandı'),
-    },
-    {
-      title: 'Seyahat Planlama',
-      learningObjective: 'Tercihleri ifade et',
-      category: 'Seyahat',
-      deadline: 'Pazartesi',
-      backgroundImage:
-        'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2035&q=80',
-      onCardClick: () => console.log('Yeni atama tıklandı'),
-    },
-    {
-      title: 'Doktor Randevusu',
-      learningObjective: 'Sağlık durumunu açıkla',
-      category: 'Sağlık',
-      deadline: 'Çarşamba',
-      backgroundImage:
-        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      onCardClick: () => console.log('Sağlık ataması tıklandı'),
-    },
-    {
-      title: 'Alışveriş Yapma',
-      learningObjective: 'Fiyat sorma ve pazarlık etme',
-      category: 'Günlük Yaşam',
-      deadline: 'Perşembe',
-      backgroundImage:
-        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
-      onCardClick: () => console.log('Alışveriş ataması tıklandı'),
-    },
-    {
-      title: 'İş Görüşmesi',
-      learningObjective: 'Kendini tanıtma ve deneyimlerini anlatma',
-      category: 'İş',
-      deadline: 'Salı',
-      backgroundImage:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      onCardClick: () => console.log('İş görüşmesi ataması tıklandı'),
-    },
-  ]
+  const navigate = useNavigate()
+
+  // Get assignments from mock data
+  const assignments = getAllAssignments().map(assignment => ({
+    ...assignment,
+    onCardClick: () => navigate(`/assignment/${assignment.id}`),
+  }))
 
   return (
     <div className="space-y-6">
-      {/* Welcome Section */}
-      <div className="text-center">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Merhaba! 👋</h2>
-        <p className="text-white/80 text-sm sm:text-base">Bugün hangi dil becerini geliştirmek istiyorsun?</p>
-      </div>
-
       {/* Assignment Cards Section */}
       <div className="space-y-3 sm:space-y-4">
         <h3 className="text-lg sm:text-xl font-semibold text-white">Atamalar</h3>

@@ -15,7 +15,7 @@ import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Switch } from '@/components/ui/switch'
 import { TextSizeModal } from '@/components/ui/text-size-modal'
 import { useTheme } from '@/lib/theme-context'
-import { BookOpen, ChevronRight, HelpCircle, LogOut, School, Type, User, X } from 'lucide-react'
+import { BookOpen, HelpCircle, LogOut, School, Type, User, X } from 'lucide-react'
 import { useState } from 'react'
 
 interface ProfileDrawerProps {
@@ -62,7 +62,7 @@ export function ProfileDrawer({ open, onOpenChange }: ProfileDrawerProps) {
           <div className="flex items-center justify-between p-6 border-b border-white/10">
             <SheetTitle className="text-white text-lg font-semibold">Profil</SheetTitle>
             <Button
-              variant="ghost"
+              variant="glass"
               size="icon"
               onClick={() => onOpenChange(false)}
               className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10"
@@ -122,18 +122,15 @@ export function ProfileDrawer({ open, onOpenChange }: ProfileDrawerProps) {
 
               <div className="space-y-4">
                 {/* Text Size Setting */}
-                <button
+                <Button
+                  variant="glass"
+                  size="default"
                   onClick={() => setShowTextSizeModal(true)}
                   className="w-full flex items-center justify-between p-3 rounded-lg glass-interactive hover:glass-hover transition-all duration-200"
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                      <Type className="h-4 w-4 text-white/70" />
-                    </div>
-                    <span className="text-white font-medium">Aa Metin Boyutu</span>
-                  </div>
-                  <ChevronRight className="h-4 w-4 text-white/50" />
-                </button>
+                  <Type className="h-4 w-4 text-white/70" />
+                  <span className="text-white font-medium">Aa Metin Boyutu</span>
+                </Button>
 
                 {/* Dark Mode Toggle */}
                 <div className="flex items-center justify-between p-3 rounded-lg glass-card border-white/20">
@@ -153,29 +150,15 @@ export function ProfileDrawer({ open, onOpenChange }: ProfileDrawerProps) {
             </div>
 
             {/* Help Option */}
-            <div className="p-6 border-b border-white/10">
-              <button
-                className="w-full flex items-center space-x-3 p-3 rounded-lg glass-interactive hover:glass-hover transition-all duration-200 opacity-50 cursor-not-allowed"
-                disabled
-              >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                  <HelpCircle className="h-4 w-4 text-white/70" />
-                </div>
+            <div className="grid grid-cols-2 gap-2 p-6 border-b border-white/10">
+              <Button variant="glass" size="default">
+                <HelpCircle className="h-4 w-4 text-white/70" />
                 <span className="text-white font-medium">❓ Yardım</span>
-              </button>
-            </div>
-
-            {/* Logout Option */}
-            <div className="p-6">
-              <button
-                onClick={() => setShowLogoutDialog(true)}
-                className="w-full flex items-center space-x-3 p-3 rounded-lg glass-interactive hover:glass-hover transition-all duration-200"
-              >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                  <LogOut className="h-4 w-4 text-red-400" />
-                </div>
-                <span className="text-red-400 font-medium">🚪 Çıkış Yap</span>
-              </button>
+              </Button>
+              <Button variant="glass" size="default" onClick={() => setShowLogoutDialog(true)}>
+                <LogOut className="h-4 w-4 text-red-400" />
+                <span className="text-red-400 font-medium">Çıkış Yap</span>
+              </Button>
             </div>
           </div>
         </SheetContent>
