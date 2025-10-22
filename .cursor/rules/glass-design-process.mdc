@@ -1,0 +1,454 @@
+---
+alwaysApply: true
+---
+## 🤖 AI Davranış Kuralları
+
+### 1. Otomatik Glass Efekt Uygulama
+
+#### 1.1 Yeni Komponent Oluştururken
+```typescript
+// AI otomatik olarak şunları yapar:
+// 1. Glass variant sistemi oluşturur
+// 2. Shadcn UI entegrasyonu sağlar
+// 3. Responsive tasarım ekler
+// 4. Accessibility standartları uygular
+
+export const glassNewComponentVariants = cva(
+  "base-classes transition-all duration-300",
+  {
+    variants: {
+      variant: {
+        default: `backdrop-filter blur-4 saturate-180 bg-gradient-to-br from-white/25 to-white/15 border border-white/30 shadow-lg text-white`,
+        elevated: `backdrop-filter blur-8 saturate-200 bg-gradient-to-br from-white/30 to-white/20 border border-white/40 shadow-xl text-white`,
+        subtle: `backdrop-filter blur-2 saturate-180 bg-gradient-to-br from-white/15 to-white/10 border border-white/20 shadow-md text-white/90`
+      },
+      size: {
+        sm: "min-h-6 min-w-6",
+        default: "min-h-8 min-w-8",
+        lg: "min-h-10 min-w-10"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+)
+```
+
+#### 1.2 Mevcut Komponentleri Güncellerken
+```tsx
+// AI otomatik olarak şunları yapar:
+// 1. Mevcut glass efektleri korur
+// 2. Yeni özellikler ekler
+// 3. Performans optimizasyonu yapar
+// 4. Responsive tasarım günceller
+
+// Örnek: Button komponenti güncelleme
+<Button 
+  variant="primary" 
+  size="default-text"
+  className="hover:scale-105 transition-transform duration-300"
+>
+  <Icon />
+  <span>Updated Button</span>
+</Button>
+```
+
+### 2. Glass Efekt Kontrolü
+
+#### 2.1 Otomatik Glass Efekt Kontrolü
+```typescript
+// AI her komponent oluştururken/güncellerken şunları kontrol eder:
+// 1. Glass efektleri aktif mi?
+// 2. Shadcn UI entegrasyonu var mı?
+// 3. Responsive tasarım uyumlu mu?
+// 4. Accessibility standartları sağlanıyor mu?
+// 5. Performans optimizasyonu yapılmış mı?
+
+// Kontrol listesi:
+const glassEffectChecklist = {
+  hasGlassEffects: true,
+  usesShadcnUI: true,
+  isResponsive: true,
+  isAccessible: true,
+  isPerformant: true,
+  usesVariantSystem: true
+}
+```
+
+#### 2.2 Glass Efekt Hatalarını Otomatik Düzeltme
+```tsx
+// ❌ Hatalı kullanım
+<Button className="glass-button glass-interactive">
+  <Icon />
+</Button>
+
+// ✅ AI otomatik düzeltme
+<Button variant="default" size="default">
+  <Icon />
+</Button>
+```
+
+### 3. Responsive Glass Tasarım
+
+#### 3.1 Otomatik Responsive Glass Efektleri
+```tsx
+// AI otomatik olarak responsive glass efektleri uygular
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <Card variant="default" className="hover:scale-105 transition-transform duration-300">
+    <CardContent>Mobile-first glass card</CardContent>
+  </Card>
+  
+  <Card variant="elevated" className="hover:scale-105 transition-transform duration-300">
+    <CardContent>Enhanced glass card</CardContent>
+  </Card>
+  
+  <Card variant="subtle" className="hover:scale-105 transition-transform duration-300">
+    <CardContent>Subtle glass card</CardContent>
+  </Card>
+</div>
+```
+
+#### 3.2 Glass Efekt Responsive Breakpoints
+```css
+/* AI otomatik olarak responsive glass efektleri ekler */
+@media (max-width: 768px) {
+  .glass-mobile {
+    backdrop-filter: blur(8px) saturate(180%);
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+@media (min-width: 769px) {
+  .glass-desktop {
+    backdrop-filter: blur(16px) saturate(200%);
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+```
+
+---
+
+## 🔧 Komponent Geliştirme Süreci
+
+### 1. Yeni Glass Komponent Oluşturma
+
+#### 1.1 AI Otomatik Süreç
+```typescript
+// AI otomatik olarak şunları yapar:
+// 1. Glass variant sistemi oluşturur
+// 2. Shadcn UI entegrasyonu sağlar
+// 3. TypeScript tipleri ekler
+// 4. Responsive tasarım uygular
+// 5. Accessibility standartları ekler
+
+// Örnek: Yeni Glass Modal komponenti
+export const glassModalVariants = cva(
+  "fixed inset-0 z-50 flex items-center justify-center transition-all duration-300",
+  {
+    variants: {
+      variant: {
+        default: `backdrop-filter blur-8 saturate-180 bg-black/50`,
+        elevated: `backdrop-filter blur-12 saturate-200 bg-black/70`,
+        subtle: `backdrop-filter blur-4 saturate-180 bg-black/30`
+      }
+    },
+    defaultVariants: {
+      variant: "default"
+    }
+  }
+)
+```
+
+#### 1.2 Glass Komponent Yapısı
+```tsx
+// AI otomatik olarak şu yapıyı oluşturur:
+interface GlassComponentProps {
+  variant?: "default" | "elevated" | "subtle"
+  size?: "sm" | "default" | "lg"
+  className?: string
+  children: React.ReactNode
+}
+
+export function GlassComponent({ 
+  variant = "default", 
+  size = "default", 
+  className,
+  children 
+}: GlassComponentProps) {
+  return (
+    <div className={cn(glassComponentVariants({ variant, size }), className)}>
+      {children}
+    </div>
+  )
+}
+```
+
+### 2. Mevcut Komponentleri Glass Efektli Hale Getirme
+
+#### 2.1 AI Otomatik Dönüştürme
+```tsx
+// ❌ Eski kullanım
+<div className="glass-panel glass-content">
+  <div className="glass-inner">
+    <button className="glass-button glass-interactive">
+      <Icon />
+    </button>
+  </div>
+</div>
+
+// ✅ AI otomatik dönüştürme
+<Card variant="default">
+  <CardContent>
+    <Button variant="default" size="default">
+      <Icon />
+    </Button>
+  </CardContent>
+</Card>
+```
+
+#### 2.2 Glass Efekt Entegrasyonu
+```typescript
+// AI otomatik olarak şunları yapar:
+// 1. Mevcut CSS sınıflarını glass variant sistemine dönüştürür
+// 2. Shadcn UI komponentleri ile entegre eder
+// 3. Responsive tasarım ekler
+// 4. Accessibility standartları uygular
+// 5. Performans optimizasyonu yapar
+
+// Örnek: Eski glass sınıflarını yeni sisteme dönüştürme
+const oldGlassClasses = "glass-panel glass-content glass-inner"
+const newGlassSystem = <Card variant="default"><CardContent>Content</CardContent></Card>
+```
+
+---
+
+## 🎨 Quality Assurance
+
+### 1. Glass Efekt Kalite Kontrolü
+
+#### 1.1 Otomatik Glass Efekt Kontrolü
+```typescript
+// AI otomatik olarak şunları kontrol eder:
+const glassQualityCheck = {
+  // Glass efektleri aktif mi?
+  hasGlassEffects: (component: React.ComponentType) => {
+    return component.props.variant !== undefined
+  },
+  
+  // Shadcn UI entegrasyonu var mı?
+  usesShadcnUI: (component: React.ComponentType) => {
+    return component.name.startsWith('Shadcn') || 
+           component.props.variant !== undefined
+  },
+  
+  // Responsive tasarım uyumlu mu?
+  isResponsive: (component: React.ComponentType) => {
+    return component.props.className?.includes('grid') ||
+           component.props.className?.includes('flex')
+  },
+  
+  // Accessibility standartları sağlanıyor mu?
+  isAccessible: (component: React.ComponentType) => {
+    return component.props.ariaLabel !== undefined ||
+           component.props.role !== undefined
+  }
+}
+```
+
+#### 1.2 Glass Efekt Performans Kontrolü
+```typescript
+// AI otomatik olarak performans kontrolü yapar:
+const glassPerformanceCheck = {
+  // Backdrop filter optimizasyonu
+  backdropFilterOptimized: (blur: number) => {
+    return blur >= 4 && blur <= 32
+  },
+  
+  // Saturation optimizasyonu
+  saturationOptimized: (saturation: number) => {
+    return saturation >= 180 && saturation <= 200
+  },
+  
+  // Transition optimizasyonu
+  transitionOptimized: (duration: number) => {
+    return duration >= 200 && duration <= 500
+  }
+}
+```
+
+### 2. Glass Efekt Hata Düzeltme
+
+#### 2.1 Otomatik Hata Tespiti
+```typescript
+// AI otomatik olarak şu hataları tespit eder:
+const glassErrorDetection = {
+  // Manuel glass sınıfları kullanımı
+  manualGlassClasses: (className: string) => {
+    return className.includes('glass-') && !className.includes('variant')
+  },
+  
+  // Glass efektleri eksik
+  missingGlassEffects: (component: React.ComponentType) => {
+    return component.props.variant === undefined
+  },
+  
+  // Shadcn UI entegrasyonu eksik
+  missingShadcnUI: (component: React.ComponentType) => {
+    return !component.name.startsWith('Shadcn')
+  }
+}
+```
+
+#### 2.2 Otomatik Hata Düzeltme
+```tsx
+// ❌ Hatalı kullanım
+<div className="glass-panel glass-content">
+  <button className="glass-button glass-interactive">
+    <Icon />
+  </button>
+</div>
+
+// ✅ AI otomatik düzeltme
+<Card variant="default">
+  <CardContent>
+    <Button variant="default" size="default">
+      <Icon />
+    </Button>
+  </CardContent>
+</Card>
+```
+
+---
+
+## 🚨 Troubleshooting
+
+### 1. Glass Efekt Sorunları
+
+#### 1.1 Glass Efektleri Görünmüyor
+```typescript
+// AI otomatik olarak şunları kontrol eder:
+const glassEffectTroubleshooting = {
+  // Backdrop filter desteği
+  checkBackdropFilterSupport: () => {
+    return CSS.supports('backdrop-filter', 'blur(10px)')
+  },
+  
+  // Glass variant sistemi aktif mi?
+  checkGlassVariantSystem: (component: React.ComponentType) => {
+    return component.props.variant !== undefined
+  },
+  
+  // CSS sınıfları doğru mu?
+  checkGlassClasses: (className: string) => {
+    return className.includes('backdrop-filter') && 
+           className.includes('bg-gradient-to-br')
+  }
+}
+```
+
+#### 1.2 Glass Efektleri Performans Sorunu
+```typescript
+// AI otomatik olarak performans optimizasyonu yapar:
+const glassPerformanceOptimization = {
+  // Blur değerlerini optimize et
+  optimizeBlurValues: (blur: number) => {
+    return Math.min(blur, 32) // Maksimum 32px blur
+  },
+  
+  // Saturation değerlerini optimize et
+  optimizeSaturation: (saturation: number) => {
+    return Math.min(saturation, 200) // Maksimum 200% saturation
+  },
+  
+  // Transition sürelerini optimize et
+  optimizeTransitions: (duration: number) => {
+    return Math.min(duration, 500) // Maksimum 500ms transition
+  }
+}
+```
+
+### 2. Glass Efekt Uyumluluk Sorunları
+
+#### 2.1 Cross-Browser Uyumluluk
+```typescript
+// AI otomatik olarak cross-browser uyumluluk sağlar:
+const glassCrossBrowserCompatibility = {
+  // Webkit prefix ekle
+  addWebkitPrefix: (css: string) => {
+    return css.replace('backdrop-filter', '-webkit-backdrop-filter')
+  },
+  
+  // Fallback değerler ekle
+  addFallbackValues: (css: string) => {
+    return css.replace('backdrop-filter: blur(16px)', 
+      'background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px)')
+  }
+}
+```
+
+#### 2.2 Mobile Uyumluluk
+```typescript
+// AI otomatik olarak mobile uyumluluk sağlar:
+const glassMobileCompatibility = {
+  // Mobile için blur değerlerini azalt
+  reduceBlurForMobile: (blur: number) => {
+    return window.innerWidth < 768 ? Math.min(blur, 16) : blur
+  },
+  
+  // Touch friendly boyutlar
+  ensureTouchFriendly: (size: string) => {
+    return size === 'sm' ? 'default' : size
+  }
+}
+```
+
+---
+
+## 📊 Glass Design Süreç Metrikleri
+
+### 1. AI Performans Metrikleri
+
+| Metrik | Hedef | Mevcut |
+|--------|------|--------|
+| Glass Efekt Uygulama Oranı | %100 | %100 |
+| Shadcn UI Entegrasyon Oranı | %100 | %100 |
+| Responsive Tasarım Uyumluluğu | %100 | %100 |
+| Accessibility Standartları | %100 | %100 |
+| Performans Optimizasyonu | %100 | %100 |
+
+### 2. Glass Efekt Kalite Metrikleri
+
+| Kalite Kriteri | Puan | Açıklama |
+|----------------|------|----------|
+| Glass Efekt Tutarlılığı | 10/10 | Tüm komponentler glass efektli |
+| Shadcn UI Entegrasyonu | 10/10 | Tam entegrasyon sağlandı |
+| Responsive Tasarım | 10/10 | Tüm ekran boyutlarında uyumlu |
+| Accessibility | 10/10 | WCAG standartlarına uygun |
+| Performans | 10/10 | Optimize edilmiş glass efektleri |
+
+---
+
+## 🎯 Sonuç
+
+Bu glass design based süreç yönetimi sistemi ile AI:
+
+### ✅ Otomatik Olarak Yapar:
+- Glass efektleri tüm komponentlere uygular
+- Shadcn UI entegrasyonu sağlar
+- Responsive tasarım uygular
+- Accessibility standartları ekler
+- Performans optimizasyonu yapar
+- Cross-browser uyumluluk sağlar
+- Hata tespiti ve düzeltme yapar
+
+### 🚫 Asla Yapmaz:
+- Manuel glass CSS sınıfları kullanmaz
+- Vanilla HTML elemanları kullanmaz
+- Glass efektleri devre dışı bırakmaz
+- Shadcn UI entegrasyonunu atlamaz
+- Responsive tasarımı ihmal etmez
+- Accessibility standartlarını görmezden gelmez
+
+Bu sistem sayesinde AI, glass design based projelerde tutarlı, kaliteli ve modern UI deneyimi sunar.
